@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>person</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="Person" ng-controller="personController as personCtrl">
+    <div class="container">
+        <form>
+            <input type="number" hidden="true" ng-model="person.id"/>
+            Birthday: <br/>
+            <input type="date" ng-model="person.birthday"/><br/>
+            Lastname:<br/>
+            <input type="text" ng-model="person.lastname"/><br/>
+            Lastname2:<br/>
+            <input type="text" ng-model="person.lastname2"/><br/>
+            Name:<br/>
+            <input type="text" ng-model="person.name"/>
+            Phone:<br/>
+            <input type="number" ng-model="person.phone"/>
+            User:<br/>
+            <input type="number" ng-model="person.user"/>
+            <br/><br/>
+            <input type="submit" class="btn" ng-init="save = true" ng-click="personCtrl.action()"/>
+        </form>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <th>Birthday</th>
+                <th>Lastname</th>
+                <th>Lastname2</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>User</th>
+                <th>Opciones</th>
+            </thead>
+            <tbody ng-repeat="person in persons">
+                <tr>
+                    <td>{{person.birthday}}</td>
+                    <td>{{person.lastname}}</td>
+                    <td>{{person.lastname2}}</td>
+                    <td>{{person.name}}</td>
+                    <td>{{person.phone}}</td>
+                    <td>{{person.user}}</td>
+                    <td><button type="submit" ng-click="personCtrl.delete(person.id)" class="btn btn-danger">X</button></td>
+                    <td><button type="submit" ng-click="personCtrl.edit(person)" class="btn">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<script>
+    var app = angular.module("Person", []);
+
+    app.controller('personController', ['$scope', '$http',
+    function ($scope, $http) {
+        $scope.persons = [];
+        $scope.person = {};
+        var outScope = this;
+
+        this.action = function () {
+            if($scope.save === true){
+                outScope.save();
+            }else{
+                outScope.update();
+            }
+        };
+
+        this.getOne = function () {
+            $http({
+                method: 'get',
+                url: 'http://localhost:9090/api/person/' + $scope.person.id,
+                contentType: "application/x-www-form-urlencoded"
+            }).then(
+                function (answer) {
+                    $scope.person = answer.data;
+            });
+        };
+
+        this.getAll = function () {
+            $http({
+                method: 'get',
+                url: 'http://localhost:9090/api/person/getAll',
+                contentType: "application/x-www-form-urlencoded"
+            }).then(
+                function (answer) {
+                    $scope.persons = answer.data;
+            });
+        };
+
+        this.save = function () {
+            $http({
+                method: 'post',
+                headers: new Headers({
+                    contentType: 'application/json'
+                }),
+                data: $scope.person,
+                url: 'http://localhost:9090/api/person/person/'
+            }).then(
+                function (answer) {
+                    //$scope.persons.push(answer.data);
+                    outScope.getAll();
+            });
+        };
+
+        this.update = function () {
+            $http({
+                method: 'patch',
+                headers: new Headers({
+                    contentType: 'application/json'
+                }),
+                data: $scope.person,
+                url: 'http://localhost:9090/api/person/update'
+            }).then(
+                function (answer) {
+                    //$scope.persons.push(answer.data);
+                    $scope.save = true;
+                    console.log($scope.save);
+                    outScope.getAll();
+            });
+        };
+
+        this.delete = function (id) {
+            $http({
+                method: 'delete',
+                headers: new Headers({
+                    contentType: 'application/json'
+                }),
+                url: 'http://localhost:9090/api/person/delete/' + id
+            }).then(
+                function (answer) {
+                    outScope.getAll();
+            });
+        };
+
+        this.edit = function (person){
+            $scope.person = person;
+            $scope.save = false;
+        }
+
+        this.getAll();
+    }
+    ]);
+</script>
+</body>
+</html>

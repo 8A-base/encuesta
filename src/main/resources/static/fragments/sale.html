@@ -1,0 +1,36 @@
+<div class="container">
+    <form>
+        <input type="number" hidden="true" ng-model="sale.id"/>
+        Costo: <br/>
+        <input type="number" ng-model="sale.cost"/><br/>
+        Cantidad:<br/>
+        <input type="number" ng-model="sale.quantity"/><br/>
+        Dulce:<br/>
+        <select ng-model="sale.candyId" ng-options="candy.flavour for candy in candies">
+        </select>
+
+        <br/><br/>
+        <input type="submit" class="btn" ng-init="save = true" ng-click="sCtrl.action()"/>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <th>Costo</th>
+        <th>Cantidad</th>
+        <th>Dulce</th>
+
+        <th>Opciones</th>
+        </thead>
+        <tbody ng-repeat="sale in sales">
+        <tr>
+            <td>{{sale.cost}}</td>
+            <td>{{sale.quantity}}</td>
+            <td>{{sale.candyId.flavour}}</td>
+
+            <td><button type="submit" ng-click="sCtrl.delete(sale.id)" class="btn btn-danger">X</button></td>
+            <td><button type="submit" ng-click="sCtrl.edit(sale)" class="btn">Editar</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

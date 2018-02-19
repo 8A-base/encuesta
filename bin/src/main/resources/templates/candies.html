@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Dulces</title>
+    <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+
+
+<body>
+<table class="table ">
+    <thead class="mdb-color darken-3">
+    <tr>
+        <th scope="col">#</th>
+        <th>peso</th>
+        <th>coddddsto</th>
+        <th>sabor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="candy : ${candies}">
+        <th scope="row">1</th>
+        <td th:text="${candy.weight}"></td>
+        <td th:text="${candy.cost}"></td>
+        <td th:text="${candy.flavour}"></td>
+    </tr>
+    </tbody>
+</table>
+<!--  <script src="/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

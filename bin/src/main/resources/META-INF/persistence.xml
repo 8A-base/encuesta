@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="mx.edu.utez.moncas_moncas_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>mx.edu.utez.encuesta.entity.User</class>
+        <class>mx.edu.utez.encuesta.entity.Role</class>
+        <class>mx.edu.utez.encuesta.entity.Sale</class>
+        <class>mx.edu.utez.encuesta.entity.Person</class>
+        <class>mx.edu.utez.encuesta.entity.DetailSale</class>
+        <class>mx.edu.utez.encuesta.entity.Candy</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/wwenterprise?zeroDateTimeBehavior=convertToNull"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+        </properties>
+    </persistence-unit>
+</persistence>

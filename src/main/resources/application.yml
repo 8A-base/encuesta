@@ -1,0 +1,28 @@
+
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=encuesta
+    username: sa
+    password: root
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    testWhileIdle: true
+    
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2017Dialect
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+
+  queries:
+    users-query: select nombre, email, contrasena, active from user where email=?
+    roles-query: select u.email, r.role from usuario u inner join usuario_has_rol ur on(u.id=ur.id) inner join rol r on(ur.rol_id=r.rol_id) where u.email=?
+    
+server:
+    port: 9090

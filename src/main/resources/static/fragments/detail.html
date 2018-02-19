@@ -1,0 +1,34 @@
+<div class="container">
+    <form>
+        <input type="number" hidden="true" ng-model="detailSale.id"/>
+        Date: <br/>
+        <input type="date" ng-model="detailSale.date"/><br/>
+        Person:<br/>
+        <input type="number" ng-model="detailSale.personID"/><br/>
+        Sale:<br/>
+        <input type="number" ng-model="detailSale.saleId"/><br/>
+
+        <br/><br/>
+        <input type="submit" class="btn" ng-init="save = true" ng-click="dCtrl.action()"/>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <th>Date</th>
+            <th>Person</th>
+            <th>Sale</th>
+            <th>Opciones</th>
+        </thead>
+        <tbody ng-repeat="detailSale in detailSales">
+        <tr>
+            <td>{{detailSale.date}}</td>
+            <td>{{detailSale.personID}}</td>
+            <td>{{detailSale.saleId}}</td>
+
+            <td><button type="submit" ng-click="dCtrl.delete(detailSale.id)" class="btn btn-danger">X</button></td>
+            <td><button type="submit" ng-click="dCtrl.edit(detailSale)" class="btn">Edit</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

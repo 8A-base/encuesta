@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Moncas</title>
+    <link href="#" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" />
+    <script th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/angular.min.js}"></script>
+    <script th:src="@{/js/angular-route.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/candyController.js}"></script>
+    <script th:src="@{/js/saleController.js}"></script>
+    <script th:src="@{/js/detailController.js}"></script>
+</head>
+<body ng-app="moncas">
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/logout}">Salir</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#candy"><i class="fa fa-home"></i> dulces</a></li>
+                    <li><a href="#sale"><i class="fa fa-shield"></i> ventas</a></li>
+                    <li><a href="#detail"><i class="fa fa-comment"></i> detalles</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="main">
+        <div ng-view></div>
+        <!-- this is where content is injected -->
+    </div>
+</body>
+</html>
