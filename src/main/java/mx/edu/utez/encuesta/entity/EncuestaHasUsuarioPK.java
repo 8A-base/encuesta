@@ -21,7 +21,7 @@ public class EncuestaHasUsuarioPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "Encuesta_idEncuesta")
-    private int encuestaidEncuesta;
+    private String encuestaidEncuesta;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Usuario_idUsuario")
@@ -34,17 +34,17 @@ public class EncuestaHasUsuarioPK implements Serializable {
     public EncuestaHasUsuarioPK() {
     }
 
-    public EncuestaHasUsuarioPK(int encuestaidEncuesta, int usuarioidUsuario, int respuestaidRespuesta) {
+    public EncuestaHasUsuarioPK(String encuestaidEncuesta, int usuarioidUsuario, int respuestaidRespuesta) {
         this.encuestaidEncuesta = encuestaidEncuesta;
         this.usuarioidUsuario = usuarioidUsuario;
         this.respuestaidRespuesta = respuestaidRespuesta;
     }
 
-    public int getEncuestaidEncuesta() {
+    public String getEncuestaidEncuesta() {
         return encuestaidEncuesta;
     }
 
-    public void setEncuestaidEncuesta(int encuestaidEncuesta) {
+    public void setEncuestaidEncuesta(String encuestaidEncuesta) {
         this.encuestaidEncuesta = encuestaidEncuesta;
     }
 
@@ -64,33 +64,6 @@ public class EncuestaHasUsuarioPK implements Serializable {
         this.respuestaidRespuesta = respuestaidRespuesta;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) encuestaidEncuesta;
-        hash += (int) usuarioidUsuario;
-        hash += (int) respuestaidRespuesta;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EncuestaHasUsuarioPK)) {
-            return false;
-        }
-        EncuestaHasUsuarioPK other = (EncuestaHasUsuarioPK) object;
-        if (this.encuestaidEncuesta != other.encuestaidEncuesta) {
-            return false;
-        }
-        if (this.usuarioidUsuario != other.usuarioidUsuario) {
-            return false;
-        }
-        if (this.respuestaidRespuesta != other.respuestaidRespuesta) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {

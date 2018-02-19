@@ -19,7 +19,7 @@ function ($scope, $rootScope, $http) {
             contentType: "application/x-www-form-urlencoded"
         }).then(
             function (answer) {
-                $scope.candy = answer.data;
+                $scope.pregunta = answer.data;
         });
     };
 
@@ -30,7 +30,7 @@ function ($scope, $rootScope, $http) {
             contentType: "application/x-www-form-urlencoded"
         }).then(
             function (answer) {
-                $scope.respuestas = answer.data;
+                $scope.preguntas = answer.data;
         });
     };
 
@@ -41,7 +41,7 @@ function ($scope, $rootScope, $http) {
                 contentType: 'application/json'
             }),
             data: $scope.respuesta,
-            url: 'http://localhost:9090/api/respuesta/respuesta/'
+            url: 'http://localhost:9090/api/pregunta/pregunta/'
         }).then(
             function (answer) {
                 outScope.getAll();
@@ -71,7 +71,7 @@ function ($scope, $rootScope, $http) {
             headers: new Headers({
                 contentType: 'application/json'
             }),
-            url: 'http://localhost:9090/api/candy/delete/' + id
+            url: 'http://localhost:9090/api/pregunta/delete/' + id
         }).then(
             function (answer) {
                 console.log("eliminado")
@@ -79,8 +79,8 @@ function ($scope, $rootScope, $http) {
         });
     };
 
-    this.edit = function (respuesta){
-        $scope.respuesta = respuesta;
+    this.edit = function (pregunta){
+        $scope.pregunta = pregunta;
         $scope.save = false;
     };
 

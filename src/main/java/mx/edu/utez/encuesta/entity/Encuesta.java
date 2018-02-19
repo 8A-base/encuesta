@@ -37,7 +37,7 @@ public class Encuesta implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "idEncuesta")
-    private Integer idEncuesta;
+    private String idEncuesta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -57,20 +57,20 @@ public class Encuesta implements Serializable {
     public Encuesta() {
     }
 
-    public Encuesta(Integer idEncuesta) {
+    public Encuesta(String idEncuesta) {
         this.idEncuesta = idEncuesta;
     }
 
-    public Encuesta(Integer idEncuesta, String nombre) {
+    public Encuesta(String idEncuesta, String nombre) {
         this.idEncuesta = idEncuesta;
         this.nombre = nombre;
     }
 
-    public Integer getIdEncuesta() {
+    public String getIdEncuesta() {
         return idEncuesta;
     }
 
-    public void setIdEncuesta(Integer idEncuesta) {
+    public void setIdEncuesta(String idEncuesta) {
         this.idEncuesta = idEncuesta;
     }
 

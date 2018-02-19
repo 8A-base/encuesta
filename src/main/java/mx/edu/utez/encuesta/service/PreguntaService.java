@@ -5,7 +5,6 @@
  */
 package mx.edu.utez.encuesta.service;
 
-import mx.edu.utez.encuesta.entity.Candy;
 import mx.edu.utez.encuesta.entity.Pregunta;
 
 import java.util.List;
@@ -14,11 +13,11 @@ import java.util.List;
  * @author dvd
  */
 public interface PreguntaService {
-    List<Pregunta> findAllCandy();
+    List<Pregunta> findAllPregunta();
 
     Pregunta findById(Integer idPregunta);
 
-    Pregunta saveCandy(Pregunta pregunta);
+    Pregunta savePregunta(Pregunta pregunta);
 
     Integer delete(Integer idPregunta);
 }
