@@ -80,26 +80,6 @@ public class Tipopregunta implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idTipoPregunta != null ? idTipoPregunta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tipopregunta)) {
-            return false;
-        }
-        Tipopregunta other = (Tipopregunta) object;
-        if ((this.idTipoPregunta == null && other.idTipoPregunta != null) || (this.idTipoPregunta != null && !this.idTipoPregunta.equals(other.idTipoPregunta))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "mx.edu.utez.encuesta.entity.Tipopregunta[ idTipoPregunta=" + idTipoPregunta + " ]";
     }
