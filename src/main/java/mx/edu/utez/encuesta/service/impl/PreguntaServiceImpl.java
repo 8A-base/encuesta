@@ -44,4 +44,14 @@ public class PreguntaServiceImpl implements PreguntaService {
         preguntaRepository.delete(idPregunta);
         return idPregunta;
     }
+
+    @Override
+    public List<Pregunta> findAllPregunta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Pregunta savePregunta(Pregunta pregunta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
