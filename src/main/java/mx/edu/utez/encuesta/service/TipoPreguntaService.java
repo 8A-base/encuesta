@@ -5,7 +5,7 @@
  */
 package mx.edu.utez.encuesta.service;
 
-import mx.edu.utez.encuesta.entity.Pregunta;
+import mx.edu.utez.encuesta.entity.Tipopregunta;
 
 import java.util.List;
 
@@ -13,8 +13,6 @@ import java.util.List;
  * @author dvd
  */
 public interface TipoPreguntaService {
-    List<Pregunta> findAllTipoPregunta();
-
-    Pregunta findById(Integer idPregunta);
+    List<Tipopregunta> findAllTipoPregunta();
 
 }

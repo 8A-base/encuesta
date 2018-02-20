@@ -5,7 +5,7 @@
  */
 package mx.edu.utez.encuesta.controller;
 
-import mx.edu.utez.encuesta.MoncasApplication;
+import mx.edu.utez.encuesta.EncuestaApplication;
 import mx.edu.utez.encuesta.entity.Person;
 import mx.edu.utez.encuesta.service.PersonService;
 import org.apache.log4j.Logger;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/person")
 public class ControllerPerson {
 
-    static Logger log = Logger.getLogger(MoncasApplication.class.getName());
+    static Logger log = Logger.getLogger(EncuestaApplication.class.getName());
 
     @Autowired
 	private PersonService personService;

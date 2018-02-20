@@ -5,10 +5,6 @@
  */
 package mx.edu.utez.encuesta.controller;
 
-import mx.edu.utez.encuesta.service.CandyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,20 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping("encuesta")
-public class ControllerMoncas {
+public class ControllerEncuesta {
 
     @GetMapping("/")
     public String dashboard() {
         return "restRouter";
     }
 
-    /*
-    @RequestMapping(value="showAll",method=RequestMethod.GET)
-    @GetMapping("showAll")
-    public String goCandy(Model model) {
-
-        model.addAttribute("candies", candyService.findAllCandy());
-        return "candies";
-    }
-    */
 }
