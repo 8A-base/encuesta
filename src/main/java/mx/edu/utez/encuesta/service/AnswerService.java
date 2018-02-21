@@ -5,14 +5,21 @@
  */
 package mx.edu.utez.encuesta.service;
 
-import mx.edu.utez.encuesta.entity.Tipopregunta;
+import mx.edu.utez.encuesta.entity.Answer;
 
 import java.util.List;
 
 /**
- * @author dvd
+ *
+ * @author Alumno
  */
-public interface TipoPreguntaService {
-    List<Tipopregunta> findAllTipoPregunta();
+public interface AnswerService {
 
+    void save(Answer answer);
+
+    void delete(Integer answer);
+
+    Answer findAnswerById(Integer answer);
+
+    List<Answer> findAll();
 }

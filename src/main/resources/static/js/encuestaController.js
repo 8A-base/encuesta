@@ -1,7 +1,7 @@
-app.controller('preguntaController', ['$scope', '$rootScope', '$http',
+app.controller('encuestaController', ['$scope', '$rootScope', '$http',
 function ($scope, $rootScope, $http) {
-    $scope.preguntas = [];
-    $scope.pregunta = {};
+    $scope.encuestas = [];
+    $scope.encuesta = {};
     var outScope = this;
 
     this.action = function () {
@@ -15,22 +15,33 @@ function ($scope, $rootScope, $http) {
     this.getOne = function () {
         $http({
             method: 'get',
-            url: 'http://localhost:9090/pregunta/api/' + $scope.pregunta.id,
+            url: 'http://localhost:9090/api/poll/' + $scope.encuesta.id,
             contentType: "application/x-www-form-urlencoded"
         }).then(
             function (answer) {
-                $scope.pregunta = answer.data;
+                $scope.encuesta = answer.data;
         });
     };
 
-    this.getAll = function () {
+    this.getAllEncuestas = function () {
         $http({
             method: 'get',
-            url: 'http://localhost:9090/api/pregunta/getAll',
+            url: 'http://localhost:9090/api/poll/getAll',
             contentType: "application/x-www-form-urlencoded"
         }).then(
             function (answer) {
-                $scope.preguntas = answer.data;
+                $scope.encuestas = answer.data;
+        });
+    };
+
+    this.getAllTipos = function () {
+        $http({
+            method: 'get',
+            url: 'http://localhost:9090/api/type/getAll',
+            contentType: "application/x-www-form-urlencoded"
+        }).then(
+            function (answer) {
+                $scope.encuestas = answer.data;
         });
     };
 
@@ -41,7 +52,7 @@ function ($scope, $rootScope, $http) {
                 contentType: 'application/json'
             }),
             data: $scope.respuesta,
-            url: 'http://localhost:9090/api/pregunta/pregunta/'
+            url: 'http://localhost:9090/api/poll/poll/'
         }).then(
             function (answer) {
                 outScope.getAll();
@@ -55,7 +66,7 @@ function ($scope, $rootScope, $http) {
                 contentType: 'application/json'
             }),
             data: $scope.respuesta,
-            url: 'http://localhost:9090/api/respuesta/update'
+            url: 'http://localhost:9090/api/poll/update'
         }).then(
             function (answer) {
                 //$scope.candies.push(answer.data);
@@ -71,7 +82,7 @@ function ($scope, $rootScope, $http) {
             headers: new Headers({
                 contentType: 'application/json'
             }),
-            url: 'http://localhost:9090/api/pregunta/delete/' + id
+            url: 'http://localhost:9090/api/poll/delete/' + id
         }).then(
             function (answer) {
                 console.log("eliminado")
@@ -79,11 +90,11 @@ function ($scope, $rootScope, $http) {
         });
     };
 
-    this.edit = function (pregunta){
-        $scope.pregunta = pregunta;
+    this.edit = function (encuesta){
+        $scope.encuesta = encuesta;
         $scope.save = false;
     };
 
-    this.getAll();
+    this.getAllEncuestas();
 }
 ]);

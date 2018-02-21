@@ -5,19 +5,22 @@
  */
 package mx.edu.utez.encuesta.repository;
 
-import mx.edu.utez.encuesta.entity.Person;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.io.Serializable;
+import mx.edu.utez.encuesta.entity.Answer;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
- * @author dvd
+ *
+ * @author Alumno
  */
 @Configuration
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer> {
-    Person findById(Integer idPerson);
-}
+public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 
+    Answer findAnswerById(Integer answer);
+
+    List<Answer> findAll();
+}

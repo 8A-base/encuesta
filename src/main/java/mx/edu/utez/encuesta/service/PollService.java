@@ -5,17 +5,20 @@
  */
 package mx.edu.utez.encuesta.service;
 
-import mx.edu.utez.encuesta.entity.Sale;
-
 import java.util.List;
+import mx.edu.utez.encuesta.entity.Poll;
 
 /**
  *
- * @author dvd
+ * @author Alumno
  */
-public interface SaleService {
-    List<Sale> findAllSale();
-    Sale findById(Integer idSale);
-    Sale saveSale(Sale sale);
-    Integer delete(Integer idSale);
+public interface PollService {
+
+    void save(Poll poll);
+
+    void delete(String poll);
+
+    Poll findPollById(String poll);
+
+    List<Poll> findAll();
 }

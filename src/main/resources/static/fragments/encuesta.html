@@ -1,0 +1,31 @@
+<div class="container">
+    <form>
+        <input type="text"  ng-model="encuesta.id"/>
+        Nombre de la encuesta: <br/>
+        <input type="text" ng-model="encuesta.name"/>
+        Pregunta: <br/>
+        <input type="text" ng-model="encuesta.description"/><br/>
+        <input type="text" ng-model="encuesta.date"/><br/>
+        <input type="text" ng-model="encuesta.user_id"/><br/>
+        <input type="submit" class="btn" ng-init="save = true" ng-click="eCtrl.action()"/>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <th>encuesta</th>
+        <th>descripción</th>
+        <th>fecha de creación</th>
+        <th>Opciones</th>
+        </thead>
+        <tbody ng-repeat="encuesta in encuestas">
+        <tr>
+            <td>{{encuesta.name}}</td>
+            <td>{{encuesta.description}}</td>
+            <td>{{encuesta.date}}</td>
+            <td><button type="submit" ng-click="eCtrl.delete(encuesta.id)" class="btn btn-danger">X</button></td>
+            <td><button type="submit" ng-click="eCtrl.edit(encuesta)" class="btn">Editar</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

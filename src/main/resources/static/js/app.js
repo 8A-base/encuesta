@@ -1,4 +1,4 @@
-var app = angular.module("moncas", ['ngRoute']);
+var app = angular.module("encuesta", ['ngRoute']);
 
 app.config(function($routeProvider, $locationProvider) {
     //note that this line does the magic ;)
@@ -7,28 +7,28 @@ app.config(function($routeProvider, $locationProvider) {
 
         // route for the home page
         .when('/', {
-            templateUrl : '../fragments/home.html',
+            templateUrl : '../fragments/encuesta.html',
         })
 
         // route for the candies page
-        .when("/candy", {
-            templateUrl : "../fragments/candy.html",
-            controller  : "candyController",
-            controllerAs: "cCtrl"
+        .when("/encuestas", {
+            templateUrl : "../fragments/encuesta.html",
+            controller  : "encuestaController",
+            controllerAs: "eCtrl"
         })
 
         // route for the sales page
-        .when('/sale', {
-            templateUrl : '../fragments/sale.html',
-            controller  : 'saleController',
-            controllerAs: 'sCtrl'
+        .when('/usuarios', {
+            templateUrl : '../fragments/usuario.html',
+            controller  : 'usuarioController',
+            controllerAs: 'uCtrl'
         })
 
         // route for the details page
-        .when('/detail', {
-            templateUrl : '../fragments/detail.html',
-            controller  : 'detailController',
-            controllerAs: 'dCtrl'
+        .when('/estadisticas', {
+            templateUrl : '../fragments/estadistica.html',
+            controller  : 'estadisticaController',
+            controllerAs: 'sCtrl'
         })
 
         // predefined route

@@ -12,7 +12,7 @@ import mx.edu.utez.encuesta.entity.User;
  * @author dvd
  */
 public interface UserService {
-    public User findUserByEmail(String email);
+    public User findByEmail(String email);
 
-    public void saveUser(User user);
+    public void save(User user);
 }

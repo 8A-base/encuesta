@@ -5,19 +5,21 @@
  */
 package mx.edu.utez.encuesta.service;
 
-import mx.edu.utez.encuesta.entity.Person;
+import mx.edu.utez.encuesta.entity.Question;
 
 import java.util.List;
 
 /**
- * @author dvd
+ *
+ * @author Alumno
  */
-public interface PersonService {
-    List<Person> findAllPerson();
+public interface QuestionService {
 
-    Person findById(Integer idPerson);
+    void save(Question question);
 
-    Person savePerson(Person person);
+    void delete(Integer question);
 
-    Integer delete(Integer idPerson);
+    Question findQuestionById(Integer question);
+
+    List<Question> findAll();
 }
