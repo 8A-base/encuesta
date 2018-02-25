@@ -7,6 +7,8 @@ package mx.edu.utez.encuesta.controller;
 
 import mx.edu.utez.encuesta.EncuestaApplication;
 import mx.edu.utez.encuesta.entity.Question;
+import mx.edu.utez.encuesta.entity.Type;
+import mx.edu.utez.encuesta.repository.TypeRepository;
 import mx.edu.utez.encuesta.service.QuestionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,19 @@ public class ControllerQuestion {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private TypeRepository type;
+
     @GetMapping("/getAll")
     public List<Question> getQuestion() {
         log.info("obteniendo todas las preguntas");
         return questionService.findAll();
+    }
+
+    @GetMapping("/getAllT")
+    public List<Type> getTypes() {
+        log.info("obteniendo todos los tipos");
+        return type.findAll();
     }
 
     @RequestMapping("/{id}")
@@ -47,7 +58,7 @@ public class ControllerQuestion {
 
     @RequestMapping(value = "/question/", method = RequestMethod.POST)
     public void create(@RequestBody Question question) {
-        log.info("Guardando la pregunta: " + question.toString());
+        log.info("Guardando la pregunta: " + question.getPollList());
         questionService.save(question);
     }
 

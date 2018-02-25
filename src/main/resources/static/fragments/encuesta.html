@@ -1,31 +1,128 @@
+<style>
+    .modal-dialog{
+    position: relative;
+    display: table; /* This is important */
+    overflow-y: auto;
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;
+}
+</style>
+
 <div class="container">
-    <form>
-        <input type="text"  ng-model="encuesta.id"/>
-        Nombre de la encuesta: <br/>
-        <input type="text" ng-model="encuesta.name"/>
-        Pregunta: <br/>
-        <input type="text" ng-model="encuesta.description"/><br/>
-        <input type="text" ng-model="encuesta.date"/><br/>
-        <input type="text" ng-model="encuesta.user_id"/><br/>
-        <input type="submit" class="btn" ng-init="save = true" ng-click="eCtrl.action()"/>
-    </form>
-</div>
-<div class="container">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPollModal">
+        Nueva encuesta
+    </button>
+    <br/><br/>
+
+
     <table class="table table-striped">
+        <label>Buscar por codigo: <input ng-model="search"></label>
         <thead>
+        <th>código de encuesta</th>
         <th>encuesta</th>
         <th>descripción</th>
         <th>fecha de creación</th>
         <th>Opciones</th>
         </thead>
-        <tbody ng-repeat="encuesta in encuestas">
+        <tbody ng-repeat="poll in polls | filter:search track by poll.id">
+        <p ng-show="(polls | filter:search).length == 0" class="text-center">No se encontraron resultados para ese código</p>
         <tr>
-            <td>{{encuesta.name}}</td>
-            <td>{{encuesta.description}}</td>
-            <td>{{encuesta.date}}</td>
-            <td><button type="submit" ng-click="eCtrl.delete(encuesta.id)" class="btn btn-danger">X</button></td>
-            <td><button type="submit" ng-click="eCtrl.edit(encuesta)" class="btn">Editar</button></td>
+            <td>{{poll.id}}</td>
+            <td>{{poll.name}}</td>
+            <td>{{poll.description}}</td>
+            <td>{{poll.date}}</td>
+            <td><button type="submit" ng-click="eCtrl.deleteE(poll.id)" class="btn btn-danger">X</button></td>
+            <td><button type="submit" ng-click="eCtrl.Eedit(poll)" class="btn" data-toggle="modal" data-target="#newPollModal">Editar</button></td>
         </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newPollModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva encuesta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form>
+                        <input type="text" hidden="true" ng-model="poll.id"/>
+                        <div class="center">Código de la encuesta: {{poll.id}}</div>
+                        <div class="form-group">
+                            <label for="Nencuesta">Nombre de la encuesta:</label>
+                            <input type="text" class="form-control" ng-model="poll.name" id="Nencuesta" placeholder="Nombre de la encuesta">
+                        </div>
+                        <div class="form-group">
+                            <label for="Dencuesta">Descripción de la encuesta:</label>
+                            <textarea rows="4" cols="50" class="form-control" ng-model="poll.description" id="Dencuesta" placeholder="Descripción de la encuesta"/>
+                        </div>
+                        <hr/>
+                        <br/><br/>
+                        Agregar preguntas:<br/>
+                        <input type="text" hidden="true" ng-model="poll.id"/>
+                        <div class="form-group">
+                            <label for="pregunta">Pregunta:</label>
+                            <input type="text" class="form-control" ng-model="question.question" id="pregunta" placeholder="Ingresa tu pregunta"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo">Tipo de pregunta:</label>
+                            <select ng-options="type.type for type in types track by type.id" id="tipo" ng-model="question.idType">
+                                <option>--Selecciona un tipo de pregunta--</option>
+                            </select>
+                        </div>
+                        <input type="submit" class="btn" ng-init="saveP = true" ng-click="eCtrl.Paction()"/>
+                        <div class="container">
+                            <table class="table table-striped">
+                                <thead>
+                                <th>Respuesta</th>
+                                <th>Correcta</th>
+                                <th>Eliminar</th>
+                                </thead>
+                                <tbody ng-repeat="answer in question.answerList">
+                                <tr>
+                                    {{answer}}
+                                    <td>{{answer.answer}}</td>
+                                    <td>{{answer.correct}}</td>
+                                    <td><button type="submit" ng-click="eCtrl.deleteR(answer.id)" class="btn btn-danger">X</button></td>
+                                    <td><button type="submit" ng-click="eCtrl.Redit(answer)" class="btn">Editar</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br><br/>
+                        <hr/>
+                        <div class="container">
+                            <table class="table table-striped">
+                                <thead>
+                                <th>pregunta</th>
+                                <th>tipo</th>
+                                <th>Opciones</th>
+                                </thead>
+                                <tbody ng-repeat="question in poll.questionList">
+                                <tr>
+                                    <td>{{question.question}}</td>
+                                    <td>{{question.idType.type}}</td>
+                                    <td><button type="submit" ng-click="eCtrl.deleteP(question.id)" class="btn btn-danger">X</button></td>
+                                    <td><button type="submit" ng-click="eCtrl.Pedit(question)" class="btn">Editar</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn" ng-init="saveE = true" ng-click="eCtrl.Eaction()" data-dismiss="modal"/>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

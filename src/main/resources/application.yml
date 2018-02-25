@@ -8,6 +8,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     testWhileIdle: true
 
+  jpa:
+    hibernate:
+      ddl-auto: validate
 
     properties:
       hibernate:
