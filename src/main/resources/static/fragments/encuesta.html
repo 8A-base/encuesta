@@ -153,9 +153,10 @@
                     <form>
                         <ul ng-repeat="question in questions" class="list-group list-group-flush">
                             <div class="card-title">{{question.question}}</div>
-                            <label ng-repeat="answer in question.answerList">
-                                <input type="radio" ng-model="a" ng-value="answer" class="list-group-item"/>{{answer.answer}}<br/>
-                            </label>
+                            <div ng-repeat="answer in question.answerList">
+                                <input type="radio" ng-model="a" ng-value="answer" class="list-group-item"/>{{answer.answer}}
+                            </div>
+                            <br/><br/>
                         </ul>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
