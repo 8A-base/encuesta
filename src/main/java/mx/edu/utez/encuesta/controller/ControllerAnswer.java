@@ -45,7 +45,7 @@ public class ControllerAnswer {
         answerService.delete(answer);
     }
 
-    @RequestMapping(value = "/question/", method = RequestMethod.POST)
+    @RequestMapping(value = "/answer/", method = RequestMethod.POST)
     public void create(@RequestBody Answer answer) {
         log.info("Guardando la pregunta: " + answer.toString());
         answerService.save(answer);

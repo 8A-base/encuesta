@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" lang="es">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
     <meta charset="UTF-8"/>
     <title>Encuesta</title>
@@ -12,6 +15,7 @@
     <script th:src="@{/js/encuestaController.js}"></script>
 </head>
 <body ng-app="encuesta">
+<input type="number" hidden="true" name="userId" id="userId" th:value="${user.id}"/>
     <header>
         <nav class="navbar navbar-default">
             <div class="container">

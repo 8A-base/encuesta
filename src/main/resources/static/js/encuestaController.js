@@ -4,11 +4,13 @@ function ($scope, $rootScope, $http) {
     $scope.poll = {};
     $scope.questions = [];
     $scope.question = {};
-    $scope.question.idType = [];
+    $scope.question.idType = {};
     $scope.types = [];
     $scope.type = {};
     $scope.answers = [];
     $scope.answer = {};
+    $scope.answer.questionId = {};
+    $scope.userId = angular.element('#userId').val();
     var outScope = this;
 
     this.Eaction = function () {
@@ -46,6 +48,11 @@ function ($scope, $rootScope, $http) {
         });
     };
 
+    this.take = function (poll) {
+        $scope.poll = poll;
+        $scope.questions = $scope.poll.questionList;
+    };
+
     this.getAllEncuestas = function () {
         $http({
             method: 'get',
@@ -69,9 +76,8 @@ function ($scope, $rootScope, $http) {
     };
 
     this.saveE = function () {
-        alert("ssssssssss");
-        $scope.questions.push($scope.question);
-        $scope.poll.questionList = $scope.questions;
+        //$scope.questions.push($scope.question);
+        //$scope.poll.questionList = $scope.questions;
         console.log($scope.poll);
         $http({
             method: 'post',
@@ -83,7 +89,7 @@ function ($scope, $rootScope, $http) {
         }).then(
             function (answer) {
                 alert("El código de tu encuesta es: " + answer);
-                outScope.getAllEncuestas();
+                $scope.getAllEncuestas();
         });
     };
 
@@ -99,7 +105,23 @@ function ($scope, $rootScope, $http) {
             url: 'http://localhost:9090/api/question/question/'
         }).then(
             function (answer) {
-                //outScope.updateQ();
+                $scope.question = {};
+        });
+    };
+
+    this.saveR = function () {
+        console.log($scope.question);
+        $scope.answer.questionId = $scope.question;
+        $http({
+            method: 'post',
+            headers: new Headers({
+                contentType: 'application/json'
+            }),
+            data: $scope.answer,
+            url: 'http://localhost:9090/api/answer/answer/'
+        }).then(
+            function (answer) {
+                $scope.answer = {};
         });
     };
 
@@ -118,6 +140,22 @@ function ($scope, $rootScope, $http) {
                 $scope.save = true;
                 console.log($scope.save);
                 outScope.getAllEncuestas();
+        });
+    };
+
+    this.updateR = function () {
+        alert($scope.answer);
+        $http({
+            method: 'patch',
+            headers: new Headers({
+                contentType: 'application/json'
+            }),
+            data: $scope.answer,
+            url: 'http://localhost:9090/api/answer/update'
+        }).then(
+            function (answer) {
+                //$scope.candies.push(answer.data);
+                $scope.saveR = true;
         });
     };
 
@@ -142,6 +180,20 @@ function ($scope, $rootScope, $http) {
                 contentType: 'application/json'
             }),
             url: 'http://localhost:9090/api/question/delete/' + id
+        }).then(
+            function (answer) {
+                console.log("eliminado")
+                outScope.getAllEncuestas();
+        });
+    };
+
+    this.deleteR = function (id) {
+        $http({
+            method: 'delete',
+            headers: new Headers({
+                contentType: 'application/json'
+            }),
+            url: 'http://localhost:9090/api/answer/delete/' + id
         }).then(
             function (answer) {
                 console.log("eliminado")
