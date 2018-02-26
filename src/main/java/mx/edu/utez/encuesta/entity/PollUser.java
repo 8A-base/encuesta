@@ -5,9 +5,13 @@
  */
 package mx.edu.utez.encuesta.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,8 +47,8 @@ public class PollUser implements Serializable {
         this.pollUserPK = pollUserPK;
     }
 
-    public PollUser(int pollId, int userId, int answerId, String open) {
-        this.pollUserPK = new PollUserPK(pollId, userId, answerId, open);
+    public PollUser(String pollId, int userId, int answerId) {
+        this.pollUserPK = new PollUserPK(pollId, userId, answerId);
     }
 
     public PollUserPK getPollUserPK() {
@@ -55,6 +59,9 @@ public class PollUser implements Serializable {
         this.pollUserPK = pollUserPK;
     }
 
+    @JsonIgnore
+    @JsonProperty(value = "pollUserList")
+    @XmlTransient
     public Poll getPoll() {
         return poll;
     }
@@ -63,6 +70,8 @@ public class PollUser implements Serializable {
         this.poll = poll;
     }
 
+    @JsonIgnore
+    @JsonProperty(value = "pollUserList")
     public Answer getAnswer() {
         return answer;
     }
@@ -71,6 +80,8 @@ public class PollUser implements Serializable {
         this.answer = answer;
     }
 
+    @JsonIgnore
+    @JsonProperty(value = "pollUserList")
     public User getUser() {
         return user;
     }
@@ -103,5 +114,5 @@ public class PollUser implements Serializable {
     public String toString() {
         return "mx.edu.utez.encuesta.entity.PollUser[ pollUserPK=" + pollUserPK + " ]";
     }
-    
+
 }

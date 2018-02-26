@@ -5,9 +5,8 @@
  */
 package mx.edu.utez.encuesta.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import mx.edu.utez.encuesta.controller.ControllerPoll;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -70,7 +69,6 @@ public class Poll implements Serializable {
     @Column(name = "ispublic")
     private Short ispublic;
     @ManyToMany(mappedBy = "pollList")
-    @JsonIgnoreProperties("pollList")
     private List<Question> questionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poll")
     private List<PollUser> pollUserList;

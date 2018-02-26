@@ -5,8 +5,8 @@
  */
 package mx.edu.utez.encuesta.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
+import mx.edu.utez.encuesta.controller.ControllerQuestion;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,7 +46,6 @@ public class Question implements Serializable {
     @ManyToMany
     private List<Poll> pollList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionId")
-    @JsonIgnoreProperties("questionId")
     private List<Answer> answerList;
     @JoinColumn(name = "id_type", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -80,6 +79,7 @@ public class Question implements Serializable {
         this.question = question;
     }
 
+    @JsonIgnoreProperties(value = {"questionList"}, allowSetters = true)
     @XmlTransient
     public List<Poll> getPollList() {
         return pollList;

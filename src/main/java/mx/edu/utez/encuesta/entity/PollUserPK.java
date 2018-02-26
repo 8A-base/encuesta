@@ -21,7 +21,7 @@ public class PollUserPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "poll_id")
-    private int pollId;
+    private String pollId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "user_id")
@@ -30,24 +30,21 @@ public class PollUserPK implements Serializable {
     @NotNull
     @Column(name = "answer_id")
     private int answerId;
-    @Column(name = "open")
-    private String open;
 
     public PollUserPK() {
     }
 
-    public PollUserPK(int pollId, int userId, int answerId, String open) {
+    public PollUserPK(String pollId, int userId, int answerId) {
         this.pollId = pollId;
         this.userId = userId;
         this.answerId = answerId;
-        this.open = open;
     }
 
-    public int getPollId() {
+    public String getPollId() {
         return pollId;
     }
 
-    public void setPollId(int pollId) {
+    public void setPollId(String pollId) {
         this.pollId = pollId;
     }
 
@@ -65,23 +62,6 @@ public class PollUserPK implements Serializable {
 
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
-    }
-
-    public String getOpen() {
-        return open;
-    }
-
-    public void setOpen(String open) {
-        this.open = open;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) pollId;
-        hash += (int) userId;
-        hash += (int) answerId;
-        return hash;
     }
 
     @Override

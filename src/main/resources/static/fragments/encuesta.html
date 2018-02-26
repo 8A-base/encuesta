@@ -153,14 +153,14 @@
                     <form>
                         <ul ng-repeat="question in questions" class="list-group list-group-flush">
                             <div class="card-title">{{question.question}}</div>
-                            <div ng-repeat="answer in question.answerList">
-                                <input type="radio" ng-model="a" ng-value="answer" class="list-group-item"/>{{answer.answer}}
+                            <div ng-repeat="answer in question.answerList track by $index">
+                                <input type="radio" name="{{question.id}}" ng-model="opinions[$index]" ng-value="answer" class="list-group-item"/>{{answer.answer}}
                             </div>
-                            <br/><br/>
+                            <br/>
                         </ul>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" ng-init="saveE = true" ng-click="eCtrl.Eaction()" data-dismiss="modal"/>
+                            <input type="submit" class="btn btn-primary" ng-init="saveE = true" ng-click="eCtrl.sendOpinion()" data-dismiss="modal"/>
                         </div>
                     </form>
                 </div>

@@ -11,6 +11,7 @@ function ($scope, $rootScope, $http) {
     $scope.answer = {};
     $scope.answer.questionId = {};
     $scope.userId = angular.element('#userId').val();
+    $scope.opinions = [];
     var outScope = this;
 
     this.Eaction = function () {
@@ -51,6 +52,7 @@ function ($scope, $rootScope, $http) {
     this.take = function (poll) {
         $scope.poll = poll;
         $scope.questions = $scope.poll.questionList;
+
     };
 
     this.getAllEncuestas = function () {
@@ -197,6 +199,22 @@ function ($scope, $rootScope, $http) {
         }).then(
             function (answer) {
                 console.log("eliminado")
+                outScope.getAllEncuestas();
+        });
+    };
+
+
+    this.sendOpinion = function () {
+        console.log($scope.opinions);
+        $http({
+            method: 'post',
+            headers: new Headers({
+                contentType: 'application/json'
+            }),
+            data: JSON.stringify($scope.opinions),
+            url: 'http://localhost:9090/api/poll/saveOpinion/'
+        }).then(
+            function (answer) {
                 outScope.getAllEncuestas();
         });
     };

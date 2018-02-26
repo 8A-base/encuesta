@@ -6,19 +6,14 @@
 package mx.edu.utez.encuesta.controller;
 
 import mx.edu.utez.encuesta.EncuestaApplication;
-import mx.edu.utez.encuesta.entity.Poll;
-import mx.edu.utez.encuesta.entity.User;
-import mx.edu.utez.encuesta.repository.UserRepository;
-import mx.edu.utez.encuesta.service.PollService;
-import mx.edu.utez.encuesta.service.UserService;
+import mx.edu.utez.encuesta.entity.*;
+import mx.edu.utez.encuesta.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +32,16 @@ public class ControllerPoll {
     private PollService pollService;
 
     @Autowired
+    private PollUserService pollUserService;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private AnswerService answerService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @GetMapping("/getAll")
     public List<Poll> getPoll() {
@@ -78,6 +82,21 @@ public class ControllerPoll {
         pollService.save(poll);
     }
 
+    @RequestMapping(value = "/saveOpinion/", method = RequestMethod.POST)
+    public void saveOpinion(@RequestBody Answer[] opinion) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByEmail(loggedInUser.getName());
+        log.info(opinion[0].getQuestionId().getId());
+        for (Answer opin : opinion){
+            Question que = questionService.findQuestionById(opin.getQuestionId().getId());
+            log.info("POLL LIST DE LA QUESTION");
+            Poll[] polls = que.getPollList().toArray(new Poll[0]);
+            log.info(polls[0].getId());
+            PollUser opinionGot = new PollUser(polls[0].getId(), user.getId(), opin.getId());
+            pollUserService.save(opinionGot);
+        }
+    }
+
     protected String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -87,6 +106,5 @@ public class ControllerPoll {
         }
         return salt.toString();
     }
-
 
 }
